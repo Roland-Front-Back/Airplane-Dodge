@@ -4,18 +4,17 @@
   box-sizing: border-box;
 }
 
-:root {
-  --main-bg-color: ;
-  --section-bg-color: ;
-  --golden-yellow: ;
-}
-
 body {
-  /* background-color: ; */
+  background-color: rgb(129, 186, 237);
+  background-image: linear-gradient(
+    0deg,
+    rgba(129, 186, 237, 1) 32%,
+    rgba(0, 198, 255, 1) 63%
+  );
 }
 
 .start-screen {
-  /* background-color: ; */
+  background-color: #2a9d8f;
   width: 100%;
   position: absolute;
   top: 50%;
@@ -44,14 +43,14 @@ body {
   margin: 10px;
   color: #0a0a23;
   font-size: 18px;
-  /* background-color: var(--golden-yellow);
-    background-image: linear-gradient(#fecc4c, #ffac23);
-    border-color: var(--golden-yellow); */
+  background-color: #caf0f8;
+  background-image: linear-gradient(#8ecae6, #90e0ef);
+  border-color: #8ecae6;
   border-width: 3px;
 }
 
 .btn:hover {
-  /* background-image: linear-gradient(#ffcc4c, #f89808); */
+  background-image: linear-gradient(#90e0ef, #8ecae6);
 }
 
 .btn-container {
