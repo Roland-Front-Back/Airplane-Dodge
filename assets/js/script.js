@@ -6,6 +6,8 @@ const startScreen = document.querySelector(".start-screen");
 const gameOverScreen = document.querySelector(".game-over-screen");
 const gameOverMessage = document.querySelector(".game-over-screen > p");
 
+const bgMusic = document.getElementById("bg-music");
+
 // Set up 2d graphics for the game using getContext from the Canvas API
 const ctx = canvas.getContext("2d");
 
@@ -138,6 +140,9 @@ const gameOver = (message) => {
   gameActive = false;
   isBuildingCollisionDetectionActive = false;
   showGameOverScreen();
+
+  // pause music
+  bgMusic.pause();
 };
 
 // Check for collision between player and building (Flappy Bird style)
@@ -265,6 +270,10 @@ const startGame = () => {
   startScreen.style.display = "none";
   gameOverScreen.style.display = "none";
 
+  // Play BG music
+  bgMusic.currentTime = 0;
+  bgMusic.play();
+
   // Start animation
   animate();
 };
@@ -272,6 +281,11 @@ const startGame = () => {
 // Handles the GameOver message
 const showGameOverScreen = () => {
   gameOverScreen.style.display = "block";
+  gameOverScreen.style.position = "fixed";
+  gameOverScreen.style.top = "50%";
+  gameOverScreen.style.left = "50%";
+  gameOverScreen.style.transform = "translate(-50%, -50%)";
+
   scoreResultElement.textContent = ` ${score}`;
 
   // Create and append retry button if it doesn't exist
