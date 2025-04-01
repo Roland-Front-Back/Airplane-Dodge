@@ -9,12 +9,17 @@
   <body>
     <div class="start-screen">
       <h1 class="main-title">Airplane Dodge</h1>
-      <p class="instructions"></p>
-      <p class="instructions"></p>
-      <p class="instructions"></p>
+      <p class="instructions">Help the plane navigate through buildings.</p>
+      <p class="instructions">Use the spacebar to help the plane to ascend.</p>
+      <p class="instructions">Avoid hitting the building as you go through.</p>
       <div class="btn-container">
         <button class="btn" id="start-btn">Start Game</button>
       </div>
+    </div>
+
+    <div class="game-over-screen">
+      <h2>You Crash!</h2>
+      <p>Your Score:<span class="score-result" id="score-result"></span></p>
     </div>
 
     <canvas id="canvas"></canvas>
