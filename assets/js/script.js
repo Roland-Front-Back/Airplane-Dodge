@@ -38,22 +38,30 @@ class Player {
       x: 0,
       y: 0,
     };
-    this.width = proportionalSize(40);
+    this.width = proportionalSize(50);
     this.height = proportionalSize(40);
+
+    this.image = new Image();
+    this.image.src = "assets/img/Fly.png";
   }
 
   draw() {
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    ctx.drawImage(
+      this.image,
+      this.position.x,
+      this.position.y,
+      this.width,
+      this.height
+    );
   }
 
   update() {
     this.draw();
-    
+
     // Only update position if game is active
     if (gameActive) {
       this.position.y += this.velocity.y;
-      
+
       // Apply gravity if not at the bottom of the canvas
       if (this.position.y + this.height + this.velocity.y <= canvas.height) {
         this.velocity.y += gravity;
@@ -63,7 +71,7 @@ class Player {
         this.position.y = canvas.height - this.height;
         gameOver("You crashed into the ground!");
       }
-      
+
       // Ceiling collision
       if (this.position.y <= 0) {
         this.position.y = 0;
@@ -71,7 +79,7 @@ class Player {
       }
     }
   }
-  
+
   reset() {
     this.position.y = proportionalSize(250);
     this.velocity.y = 0;
@@ -155,57 +163,61 @@ const animate = () => {
   if (animationId) {
     cancelAnimationFrame(animationId);
   }
-  
+
   // Handles the animation on the screen (web API)
   animationId = requestAnimationFrame(animate);
-  
+
   // Clear the canvas when rendering for next frame of the animation.
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
+
   // Update the player's position
   player.update();
-  
+
   // Display the score
   displayScore();
-  
+
   // Only move buildings if game is active
   if (gameActive) {
     // Move buildings to the left automatically (like in Flappy Bird)
     buildings.forEach((building) => {
       building.position.x -= 2; // Constant speed for buildings
       building.draw();
-      
+
       // Check for collision with buildings
       if (checkCollision(player, building) && gameActive) {
         gameOver("You crashed into a building!");
       }
-      
+
       // Add score when player passes a building
-      if (!building.passed && building.position.x + building.width < player.position.x) {
+      if (
+        !building.passed &&
+        building.position.x + building.width < player.position.x
+      ) {
         building.passed = true;
         score++;
       }
     });
-    
+
     // Reset buildings that have gone off screen
     if (buildings[0].position.x + buildings[0].width < 0) {
       // Remove the first building
       const removedBuilding = buildings.shift();
-      
+
       // Calculate new x position (place it after the last building)
       const lastBuilding = buildings[buildings.length - 1];
-      const newX = lastBuilding.position.x + proportionalSize(Math.random() * 300 + 200);
-      
+      const newX =
+        lastBuilding.position.x + proportionalSize(Math.random() * 300 + 200);
+
       // Reset the passed flag and position
       removedBuilding.passed = false;
       removedBuilding.position.x = newX;
-      
+
       // Add it to the end of the array
       buildings.push(removedBuilding);
     }
   } else {
     // Just draw buildings without moving them when game over
-    buildings.forEach(building => building.draw());
+    buildings.forEach((building) => building.draw());
   }
 };
 
@@ -213,9 +225,10 @@ const animate = () => {
 const movePlayer = (key, isPressed) => {
   // Only allow jumping if game is active
   if (!gameActive) return;
-  
-  if (key === " " && isPressed) {  // Space key for jumping
-    player.velocity.y = -8;  // Negative velocity to move upward
+
+  if (key === " " && isPressed) {
+    // Space key for jumping
+    player.velocity.y = -8; // Negative velocity to move upward
   }
 };
 
@@ -235,23 +248,23 @@ const startGame = () => {
     cancelAnimationFrame(animationId);
     animationId = null;
   }
-  
+
   // Reset game state
   gameActive = true;
   isBuildingCollisionDetectionActive = true;
   score = 0;
-  
+
   // Reset player position
   player.reset();
-  
+
   // Reset building positions
   resetBuildings();
-  
+
   // Display the canvas and hide the screens
   canvas.style.display = "block";
   startScreen.style.display = "none";
   gameOverScreen.style.display = "none";
-  
+
   // Start animation
   animate();
 };
@@ -260,7 +273,7 @@ const startGame = () => {
 const showGameOverScreen = () => {
   gameOverScreen.style.display = "block";
   scoreResultElement.textContent = ` ${score}`;
-  
+
   // Create and append retry button if it doesn't exist
   if (!document.getElementById("retry-btn")) {
     const retryBtn = document.createElement("button");
