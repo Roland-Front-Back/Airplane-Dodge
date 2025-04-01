@@ -44,7 +44,7 @@ class Player {
     this.height = proportionalSize(40);
 
     this.image = new Image();
-    this.image.src = "assets/img/Fly.png";
+    this.image.src = "./assets/img/Fly.png";
   }
 
   draw() {
@@ -315,3 +315,6 @@ canvas.addEventListener("touchstart", (e) => {
   e.preventDefault();
   movePlayer(" ", true);
 });
+
+// TODO: Update this project in the future......
+// Who Cares....
