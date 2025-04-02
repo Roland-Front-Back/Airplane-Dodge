@@ -316,5 +316,4 @@ canvas.addEventListener("touchstart", (e) => {
   movePlayer(" ", true);
 });
 
-// TODO: Update this project in the future......
-// Who Cares....
+// CHECKOUT AIRPLANE 2.0
