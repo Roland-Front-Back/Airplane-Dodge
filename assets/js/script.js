@@ -316,4 +316,4 @@ canvas.addEventListener("touchstart", (e) => {
   movePlayer(" ", true);
 });
 
-// CHECKOUT AIRPLANE 2.0
+// TODO: Fix this lvl 1 crook code in the future...
